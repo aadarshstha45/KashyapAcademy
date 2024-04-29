@@ -6,7 +6,8 @@ import { BaseURL } from "../../api/axiosSetup";
 import { Icon1 } from "../../assets/GalleryIcons";
 import { Banner } from "../../component/Banner";
 import Fancybox from "../../component/Fancybox";
-export const GalleryDetail = () => {
+
+function GalleryDetail() {
   const location = useLocation();
   const data = location?.state;
   console.log(data);
@@ -82,4 +83,6 @@ export const GalleryDetail = () => {
       )}
     </>
   );
-};
+}
+
+export default GalleryDetail;

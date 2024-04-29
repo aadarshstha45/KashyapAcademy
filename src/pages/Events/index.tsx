@@ -16,7 +16,8 @@ import { useFetchEvent } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
 import { CalendarIcon, ClockIcon, PinIcon } from "../../assets/icons";
 import { Banner } from "../../component/Banner";
-export const Events = () => {
+
+function Events() {
   const [displayCount, setDisplayCount] = useState(3);
   const [noOfLines, setNoOfLines] = useState(5);
   const handleExpand = () => {
@@ -143,4 +144,6 @@ export const Events = () => {
       </Container>
     </Flex>
   );
-};
+}
+
+export default Events;

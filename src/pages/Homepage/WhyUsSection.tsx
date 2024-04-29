@@ -31,7 +31,7 @@ export const WhyUsSection = () => {
         >
           <GridItem colSpan={1}>
             <Image
-              src={pathname === "/school/" ? SchoolImage : CollegeImage}
+              src={pathname.startsWith("/school") ? SchoolImage : CollegeImage}
               alt="School"
             />
           </GridItem>

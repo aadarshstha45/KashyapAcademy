@@ -5,7 +5,7 @@ import { Banner } from "../../component/Banner";
 import { ContactForm } from "./ContactForm";
 import { ContactInformation } from "./ContactInformation";
 
-export const Contact = () => {
+function Contact() {
   return (
     <Flex flexDir={"column"}>
       <Banner
@@ -45,4 +45,6 @@ export const Contact = () => {
       </Flex>
     </Flex>
   );
-};
+}
+
+export default Contact;

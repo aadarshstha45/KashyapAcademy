@@ -13,23 +13,6 @@ export const navItems = [
     id: 3,
     name: "Course",
     to: "course",
-    sublinks: [
-      {
-        id: 1,
-        name: "Science",
-        to: "course/science",
-      },
-      {
-        id: 2,
-        name: "Management",
-        to: "course/management",
-      },
-      {
-        id: 3,
-        name: "Law",
-        to: "course/law",
-      },
-    ],
   },
   {
     id: 4,
@@ -48,6 +31,11 @@ export const navItems = [
   },
   {
     id: 7,
+    name: "Our Team",
+    to: "our-team",
+  },
+  {
+    id: 8,
     name: "Contact",
     to: "contact",
   },

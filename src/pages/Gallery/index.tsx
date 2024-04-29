@@ -6,7 +6,8 @@ import { useFetchGallery } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
 import GalleryBanner from "../../assets/Banner/Gallery.png";
 import { Icon1 } from "../../assets/GalleryIcons";
-export const Gallery = () => {
+
+function Gallery() {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const navigate = useNavigate();
@@ -91,4 +92,6 @@ export const Gallery = () => {
       </Box>
     </Container>
   );
-};
+}
+
+export default Gallery;

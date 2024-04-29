@@ -1,6 +1,8 @@
 import { Flex } from "@chakra-ui/react";
+import { useLocation } from "react-router-dom";
 import { BlogSection } from "./BlogSection";
 import { FacilitySection } from "./FacilitySection";
+import { FacultySection } from "./FacultySection";
 import { GallerySection } from "./GallerySection";
 import { HeroSection } from "./HeroSection";
 import { MessageSection } from "./MessageSection";
@@ -10,12 +12,14 @@ import { TestimonialSection } from "./TestimonialSection";
 import { UpcomingEvents } from "./UpcomingEvents";
 import { WhyUsSection } from "./WhyUsSection";
 
-export const HomePage = () => {
+function HomePage() {
+  const location = useLocation();
+  const path = location.pathname.split("/")[1];
   return (
     <Flex flexDir={"column"}>
       <HeroSection />
       <WhyUsSection />
-      {/* {path === "college" && <FacultySection />} */}
+      {path === "college" && <FacultySection />}
       <MessageSection />
       <OurFocus />
       <FacilitySection />
@@ -42,4 +46,6 @@ export const HomePage = () => {
       </Flex>
     </Flex>
   );
-};
+}
+
+export default HomePage;

@@ -11,9 +11,8 @@ import {
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { useFetchTeams } from "../../api";
 
-export const Teams = () => {
+function Teams() {
   const { data } = useFetchTeams();
-  console.log(data);
   return (
     <>
       {data?.map((team: any, index: number) => (
@@ -114,37 +113,35 @@ export const Teams = () => {
                   </Text>
                 </Box>
                 {team?.teams.slice(0, 3).map((member: any) => (
-                  <>
-                    <Card
-                      key={member?.id}
-                      boxShadow={"0px 13px 19px 0px rgba(0, 0, 0, 0.07)"}
-                      borderRadius={"20px"}
-                      overflow={"hidden"}
-                    >
-                      <Image src={`http://127.0.0.1:8000${member?.image}`} />
-                      <CardBody overflow={"clip"}>
-                        <Stack
-                          justify={"center"}
-                          align={"center"}
-                          textAlign={"center"}
+                  <Card
+                    key={member?.id}
+                    boxShadow={"0px 13px 19px 0px rgba(0, 0, 0, 0.07)"}
+                    borderRadius={"20px"}
+                    overflow={"hidden"}
+                  >
+                    <Image src={`http://127.0.0.1:8000${member?.image}`} />
+                    <CardBody overflow={"clip"}>
+                      <Stack
+                        justify={"center"}
+                        align={"center"}
+                        textAlign={"center"}
+                      >
+                        <Text
+                          fontSize={{ base: "14px", md: "16px" }}
+                          fontWeight={700}
+                          textColor={"#252B42"}
                         >
-                          <Text
-                            fontSize={{ base: "14px", md: "16px" }}
-                            fontWeight={700}
-                            textColor={"#252B42"}
-                          >
-                            {member?.name}
-                          </Text>
-                          <Text
-                            letterSpacing={0.2}
-                            fontSize={{ base: "12px", md: "14px" }}
-                          >
-                            {member?.position}
-                          </Text>
-                        </Stack>
-                      </CardBody>
-                    </Card>
-                  </>
+                          {member?.name}
+                        </Text>
+                        <Text
+                          letterSpacing={0.2}
+                          fontSize={{ base: "12px", md: "14px" }}
+                        >
+                          {member?.position}
+                        </Text>
+                      </Stack>
+                    </CardBody>
+                  </Card>
                 ))}
               </Masonry>
             </ResponsiveMasonry>
@@ -153,4 +150,6 @@ export const Teams = () => {
       ))}
     </>
   );
-};
+}
+
+export default Teams;

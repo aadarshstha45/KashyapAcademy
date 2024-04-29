@@ -15,7 +15,7 @@ const useFetchHomeContent = (institution: string) => {
     [HomeApi.getByInstitution],
     () => fetchHomeContent(institution),
     {
-      select: (response) => response?.data?.data.home_contents,
+      select: (response) => response?.data?.data.hero_section,
       onError: (error: AxiosError) => {
         toast.error(error?.message);
       },

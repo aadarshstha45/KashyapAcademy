@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   Divider,
+  HStack,
   Link,
   Stack,
   Text,
@@ -32,7 +33,15 @@ export const Footer = () => {
             <Contact />
           </Masonry>
         </ResponsiveMasonry>
-        <Stack align={"end"} my={4}>
+        <HStack align={"end"} my={4}>
+          <Button
+            w={"fit-content"}
+            as={NavLink}
+            variant={"primary"}
+            to={"/downloads"}
+          >
+            Downloads
+          </Button>
           <Button
             w={"fit-content"}
             as={NavLink}
@@ -41,7 +50,7 @@ export const Footer = () => {
           >
             Visit {path === "school" ? "College" : "School"} site
           </Button>
-        </Stack>
+        </HStack>
 
         <Stack justify={"center"} align={"center"}>
           <Divider

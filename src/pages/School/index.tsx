@@ -30,7 +30,7 @@ export const HomeSchool = () => {
           _groupHover={{ opacity: 1 }}
           as={Link}
           reloadDocument
-          to={"/school/"}
+          to={"/school"}
           variant={"primary"}
           borderRadius={"5px"}
           rightIcon={<ChevronRightIcon fontSize={"xl"} />}

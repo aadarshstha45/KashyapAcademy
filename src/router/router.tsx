@@ -5,12 +5,51 @@ import SchoolLayout from "../layout/SchoolLayout/SchoolLayout";
 import AboutUs from "../pages/About";
 import Blogs from "../pages/Blogs";
 import BlogDetail from "../pages/Blogs/BlogDetail";
-import { Contact } from "../pages/Contact";
-import { Events } from "../pages/Events";
-import { Gallery } from "../pages/Gallery";
-import { GalleryDetail } from "../pages/Gallery/GalleryDetail";
-import { HomePage } from "../pages/Homepage";
-import { Teams } from "../pages/OurTeam/Teams";
+import Contact from "../pages/Contact";
+import Events from "../pages/Events";
+import Gallery from "../pages/Gallery";
+import GalleryDetail from "../pages/Gallery/GalleryDetail";
+import HomePage from "../pages/Homepage";
+import Teams from "../pages/OurTeam/Teams";
+
+const commonRoutes = [
+  {
+    path: "",
+    element: <HomePage />,
+  },
+  {
+    path: "about",
+    element: <AboutUs />,
+  },
+  {
+    path: "contact",
+    element: <Contact />,
+  },
+  {
+    path: "events",
+    element: <Events />,
+  },
+  {
+    path: "blogs",
+    element: <Blogs />,
+  },
+  {
+    path: "blogs/:id",
+    element: <BlogDetail />,
+  },
+  {
+    path: "gallery",
+    element: <Gallery />,
+  },
+  {
+    path: "gallery/:id",
+    element: <GalleryDetail />,
+  },
+  {
+    path: "our-team",
+    element: <Teams />,
+  },
+];
 
 export const router = createBrowserRouter([
   {
@@ -20,85 +59,17 @@ export const router = createBrowserRouter([
   {
     path: "/school",
     element: <SchoolLayout />,
-    children: [
-      {
-        path: "/school",
-        element: <HomePage />,
-      },
-      {
-        path: "/school/about",
-        element: <AboutUs />,
-      },
-      {
-        path: "/school/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/school//events",
-        element: <Events />,
-      },
-      {
-        path: "/school//blogs",
-        element: <Blogs />,
-      },
-      {
-        path: "/school//blogs/:id",
-        element: <BlogDetail />,
-      },
-      {
-        path: "/school//gallery",
-        element: <Gallery />,
-      },
-      {
-        path: "/school//gallery/:id",
-        element: <GalleryDetail />,
-      },
-      {
-        path: "/school//our-team",
-        element: <Teams />,
-      },
-    ],
+    children: commonRoutes.map((route) => ({
+      ...route,
+      path: `/school/${route.path}`,
+    })),
   },
   {
     path: "/college",
     element: <CollegeLayout />,
-    children: [
-      {
-        path: "/college",
-        element: <HomePage />,
-      },
-      {
-        path: "/college/about",
-        element: <AboutUs />,
-      },
-      {
-        path: "/college/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/college//events",
-        element: <Events />,
-      },
-      {
-        path: "/college//blogs",
-        element: <Blogs />,
-      },
-      {
-        path: "/college//blogs/:id",
-        element: <BlogDetail />,
-      },
-      {
-        path: "/college//gallery",
-        element: <Gallery />,
-      },
-      {
-        path: "/college//gallery/:id",
-        element: <GalleryDetail />,
-      },
-      {
-        path: "/college//our-team",
-        element: <Teams />,
-      },
-    ],
+    children: commonRoutes.map((route) => ({
+      ...route,
+      path: `/college/${route.path}`,
+    })),
   },
 ]);

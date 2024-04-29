@@ -4,6 +4,10 @@ import {
   Box,
   Button,
   Container,
+  Drawer,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerOverlay,
   Flex,
   HStack,
   Image,
@@ -17,16 +21,19 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useFetchCourseMenu } from "../../api/";
 import Logo from "../../assets/logo.png";
 import { navItems } from "./data";
 
 export const Navbar = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const { onOpen, onClose } = useDisclosure();
+  const { onOpen, onClose, isOpen } = useDisclosure();
   const { data } = useFetchCourseMenu();
-  // console.log(path);
+  const location = useLocation();
+  const { pathname } = location;
+  const path = pathname.split("/")[1];
+  console.log(path);
 
   return (
     <Flex as={"nav"} p={4} borderBottom={"1px solid #CACACA"}>
@@ -46,64 +53,75 @@ export const Navbar = () => {
             {navItems.map(({ id, name, to }) =>
               to === "course" ? (
                 <Popover isLazy isOpen={isPopoverOpen} key={id}>
-                  <PopoverTrigger>
-                    <Flex
-                      onMouseEnter={() => setIsPopoverOpen(true)}
-                      onMouseLeave={() => setIsPopoverOpen(false)}
-                      cursor={"pointer"}
-                      borderBottom={"2px solid transparent"}
-                      fontWeight={500}
-                      fontSize={"20px"}
-                      _hover={{
-                        borderBottom: "2px solid #FF4900",
-                      }}
-                      align={"center"}
-                      justify={"space-between"}
-                      gap={2}
-                    >
-                      <Text>Course</Text>
-                      <TriangleDownIcon boxSize={3} />
-                    </Flex>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    w={"auto"}
-                    _focus={{ ring: "none", ringColor: "transparent" }}
-                    overflow={"hidden"}
-                    onMouseEnter={() => setIsPopoverOpen(true)}
-                    onMouseLeave={() => setIsPopoverOpen(false)}
-                  >
-                    <PopoverArrow />
-                    {data ? (
-                      data.map(({ id, title }: any, index: number) => (
-                        <NavLink key={id} to={to}>
+                  {path === "college" && (
+                    <>
+                      <PopoverTrigger>
+                        <Flex
+                          onMouseEnter={() => setIsPopoverOpen(true)}
+                          onMouseLeave={() => setIsPopoverOpen(false)}
+                          cursor={"pointer"}
+                          borderBottom={"2px solid transparent"}
+                          fontWeight={500}
+                          fontSize={"20px"}
+                          _hover={{
+                            borderBottom: "2px solid #FF4900",
+                          }}
+                          _activeLink={{
+                            borderBottom:
+                              path === `/school/${to}` ||
+                              path === `/college/${to}`
+                                ? "2px solid #FF4900"
+                                : "",
+                          }}
+                          align={"center"}
+                          justify={"space-between"}
+                          gap={2}
+                        >
+                          <Text>Course</Text>
+                          <TriangleDownIcon boxSize={3} />
+                        </Flex>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        w={"auto"}
+                        _focus={{ ring: "none", ringColor: "transparent" }}
+                        overflow={"hidden"}
+                        onMouseEnter={() => setIsPopoverOpen(true)}
+                        onMouseLeave={() => setIsPopoverOpen(false)}
+                      >
+                        <PopoverArrow />
+                        {data ? (
+                          data.map(({ id, title }: any, index: number) => (
+                            <NavLink key={id} to={to}>
+                              <PopoverBody
+                                _hover={{
+                                  bg: "primary.200",
+                                  textColor: "white",
+                                }}
+                                textAlign={"center"}
+                                fontWeight={500}
+                                fontSize={"16px"}
+                                borderBottom={
+                                  index === data?.length - 1 ? "" : "1px solid"
+                                }
+                                borderBottomColor={"#CACACA"}
+                              >
+                                {title}
+                              </PopoverBody>
+                            </NavLink>
+                          ))
+                        ) : (
                           <PopoverBody
-                            _hover={{
-                              bg: "primary.200",
-                              textColor: "white",
-                            }}
                             textAlign={"center"}
                             fontWeight={500}
                             fontSize={"16px"}
-                            borderBottom={
-                              index === data?.length - 1 ? "" : "1px solid"
-                            }
-                            borderBottomColor={"#CACACA"}
+                            p={4}
                           >
-                            {title}
+                            Loading...
                           </PopoverBody>
-                        </NavLink>
-                      ))
-                    ) : (
-                      <PopoverBody
-                        textAlign={"center"}
-                        fontWeight={500}
-                        fontSize={"16px"}
-                        p={4}
-                      >
-                        Loading...
-                      </PopoverBody>
-                    )}
-                  </PopoverContent>
+                        )}
+                      </PopoverContent>
+                    </>
+                  )}
                 </Popover>
               ) : (
                 <Link
@@ -111,7 +129,17 @@ export const Navbar = () => {
                   as={NavLink}
                   key={id}
                   fontWeight={500}
-                  _hover={{ textDecoration: "none" }}
+                  _hover={{
+                    textDecoration: "none",
+                    borderBottom: "2px solid #FF4900",
+                  }}
+                  _activeLink={{
+                    borderBottom:
+                      pathname === `/school/${to}` ||
+                      pathname === `/college/${to}`
+                        ? "2px solid #FF4900"
+                        : "",
+                  }}
                   borderBottom={"2px solid transparent"}
                   to={to}
                   onClick={onClose}
@@ -123,80 +151,84 @@ export const Navbar = () => {
           </HStack>
         </Flex>
       </Container>
-      {/* <Drawer size={"full"} isOpen={isOpen} onClose={onClose}>
+      <Drawer size={"full"} isOpen={isOpen} onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
 
           <Flex flexDir={"column"} p={4} py={32} align={"center"} gap={6}>
             {navItems.map(({ id, name, to }) =>
-              to === "course" && data?.length > 0 ? (
+              to === "course" ? (
                 <Popover isLazy isOpen={isPopoverOpen} key={id}>
-                  <PopoverTrigger>
-                    <Flex
-                      onMouseEnter={() => setIsPopoverOpen(true)}
-                      onMouseLeave={() => setIsPopoverOpen(false)}
-                      cursor={"pointer"}
-                      borderBottom={"2px solid transparent"}
-                      fontWeight={500}
-                      fontSize={"20px"}
-                      _hover={{
-                        borderBottom: "2px solid #FF4900",
-                      }}
-                      align={"center"}
-                      justify={"space-between"}
-                      gap={2}
-                    >
-                      <Text>Course</Text>
-                      <TriangleDownIcon boxSize={3} />
-                    </Flex>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    w={"auto"}
-                    _focus={{ ring: "none", ringColor: "transparent" }}
-                    overflow={"hidden"}
-                    onMouseEnter={() => setIsPopoverOpen(true)}
-                    onMouseLeave={() => setIsPopoverOpen(false)}
-                  >
-                    <PopoverArrow />
-                    {data ? (
-                      data.map(({ id, title }: any, index: number) => (
-                        <NavLink
-                          key={id}
-                          to={
-                            path.startsWith("/school")
-                              ? `/school/${to}`
-                              : `/college/${to}`
-                          }
+                  {path === "college" && (
+                    <>
+                      <PopoverTrigger>
+                        <Flex
+                          onMouseEnter={() => setIsPopoverOpen(true)}
+                          onMouseLeave={() => setIsPopoverOpen(false)}
+                          cursor={"pointer"}
+                          borderBottom={"2px solid transparent"}
+                          fontWeight={500}
+                          fontSize={"20px"}
+                          _hover={{
+                            borderBottom: "2px solid #FF4900",
+                          }}
+                          _activeLink={{
+                            borderBottom:
+                              path === `/school/${to}` ||
+                              path === `/college/${to}`
+                                ? "2px solid #FF4900"
+                                : "",
+                          }}
+                          align={"center"}
+                          justify={"space-between"}
+                          gap={2}
                         >
+                          <Text>Course</Text>
+                          <TriangleDownIcon boxSize={3} />
+                        </Flex>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        w={"auto"}
+                        _focus={{ ring: "none", ringColor: "transparent" }}
+                        overflow={"hidden"}
+                        onMouseEnter={() => setIsPopoverOpen(true)}
+                        onMouseLeave={() => setIsPopoverOpen(false)}
+                      >
+                        <PopoverArrow />
+                        {data ? (
+                          data.map(({ id, title }: any, index: number) => (
+                            <NavLink key={id} to={to}>
+                              <PopoverBody
+                                _hover={{
+                                  bg: "primary.200",
+                                  textColor: "white",
+                                }}
+                                textAlign={"center"}
+                                fontWeight={500}
+                                fontSize={"16px"}
+                                borderBottom={
+                                  index === data?.length - 1 ? "" : "1px solid"
+                                }
+                                borderBottomColor={"#CACACA"}
+                              >
+                                {title}
+                              </PopoverBody>
+                            </NavLink>
+                          ))
+                        ) : (
                           <PopoverBody
-                            _hover={{
-                              bg: "primary.200",
-                              textColor: "white",
-                            }}
                             textAlign={"center"}
                             fontWeight={500}
                             fontSize={"16px"}
-                            borderBottom={
-                              index === data?.length - 1 ? "" : "1px solid"
-                            }
-                            borderBottomColor={"#CACACA"}
+                            p={4}
                           >
-                            {title}
+                            Loading...
                           </PopoverBody>
-                        </NavLink>
-                      ))
-                    ) : (
-                      <PopoverBody
-                        textAlign={"center"}
-                        fontWeight={500}
-                        fontSize={"16px"}
-                        p={4}
-                      >
-                        Loading...
-                      </PopoverBody>
-                    )}
-                  </PopoverContent>
+                        )}
+                      </PopoverContent>
+                    </>
+                  )}
                 </Popover>
               ) : (
                 <Link
@@ -204,19 +236,19 @@ export const Navbar = () => {
                   as={NavLink}
                   key={id}
                   fontWeight={500}
-                  _hover={{ textDecoration: "none" }}
+                  _hover={{
+                    textDecoration: "none",
+                    borderBottom: "2px solid #FF4900",
+                  }}
                   _activeLink={{
                     borderBottom:
-                      path === `/school/${to}` || path === `/college/${to}`
+                      pathname === `/school/${to}` ||
+                      pathname === `/college/${to}`
                         ? "2px solid #FF4900"
                         : "",
                   }}
                   borderBottom={"2px solid transparent"}
-                  to={
-                    path.startsWith("/school")
-                      ? `/school/${to}`
-                      : `/college/${to}`
-                  }
+                  to={to}
                   onClick={onClose}
                 >
                   {name}
@@ -225,7 +257,7 @@ export const Navbar = () => {
             )}
           </Flex>
         </DrawerContent>
-      </Drawer> */}
+      </Drawer>
     </Flex>
   );
 };
