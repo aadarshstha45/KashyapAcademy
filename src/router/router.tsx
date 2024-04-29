@@ -6,11 +6,12 @@ import AboutUs from "../pages/About";
 import Blogs from "../pages/Blogs";
 import BlogDetail from "../pages/Blogs/BlogDetail";
 import Contact from "../pages/Contact";
+import Downloads from "../pages/Downloads";
 import Events from "../pages/Events";
 import Gallery from "../pages/Gallery";
 import GalleryDetail from "../pages/Gallery/GalleryDetail";
 import HomePage from "../pages/Homepage";
-import Teams from "../pages/OurTeam/Teams";
+import { OurTeam } from "../pages/OurTeam";
 
 const commonRoutes = [
   {
@@ -47,7 +48,11 @@ const commonRoutes = [
   },
   {
     path: "our-team",
-    element: <Teams />,
+    element: <OurTeam />,
+  },
+  {
+    path: "downloads",
+    element: <Downloads />,
   },
 ];
 

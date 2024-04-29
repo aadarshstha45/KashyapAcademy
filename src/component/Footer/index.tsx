@@ -38,7 +38,7 @@ export const Footer = () => {
             w={"fit-content"}
             as={NavLink}
             variant={"primary"}
-            to={"/downloads"}
+            to={"downloads"}
           >
             Downloads
           </Button>

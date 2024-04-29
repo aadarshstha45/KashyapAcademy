@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "react-query";
 import {
   BlogApi,
   CourseMenuApi,
+  DownloadApi,
   FacultyApi,
   MessageApi,
   SchoolApi,
@@ -105,10 +106,30 @@ const useFetchCourseMenu = () => {
   });
 };
 
+const fetchDownload = (institution: string) => {
+  return HttpClient.get(
+    DownloadApi.getDownloads.replace(":institution", institution)
+  );
+};
+
+const useFetchDownload = (institution: string) => {
+  return useQuery(
+    [DownloadApi.getDownloads],
+    () => fetchDownload(institution),
+    {
+      select: (response) => response?.data?.data,
+      onError: (error: AxiosError) => {
+        toast.error(error?.message);
+      },
+    }
+  );
+};
+
 export {
   useFetchBlogById,
   useFetchBlogs,
   useFetchCourseMenu,
+  useFetchDownload,
   useFetchFaculty,
   useFetchSchool,
   useFetchTeams,

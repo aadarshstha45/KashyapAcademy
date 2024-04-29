@@ -35,3 +35,7 @@ export const FacultyApi = {
 export const CourseMenuApi = {
   getCourseMenu: "/course_menu_items",
 };
+
+export const DownloadApi = {
+  getDownloads: "/downloads/:institution",
+};

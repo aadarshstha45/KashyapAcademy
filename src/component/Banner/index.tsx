@@ -12,8 +12,8 @@ export const Banner = ({ image, title, subtitle, bg }: BannerProps) => {
     <Box
       bg={
         bg
-          ? `linear-gradient(180deg, rgba(98, 195, 0, 0.40) 0%, rgba(255, 111, 6, 0.40) 100%)`
-          : ``
+          ? `linear-gradient(180deg, rgba(98, 195, 0, 0.40) 0%, rgba(255, 111, 6, 0.40) 100%), url(${image})`
+          : `url(${image})`
       }
       h={{ base: "200px", md: "400px", lg: "500px" }}
       bgPosition={"center"}
@@ -21,6 +21,7 @@ export const Banner = ({ image, title, subtitle, bg }: BannerProps) => {
       pos={"relative"}
     >
       <Image
+        zIndex={-1}
         src={image}
         pos={"absolute"}
         objectFit={"cover"}
