@@ -277,13 +277,31 @@ export default function DataTable({
         </Box>
         <Flex flexDir={"column"} mt={4}>
           <Flex justify={"space-between"} align={"center"}>
-            <Box>
-              <Text fontSize={{ base: "14px", md: "16px" }}>
-                Showing Page : {table.getState()?.pagination.pageIndex + 1} of{" "}
-                {table.getPageCount()}
+            <Flex justifyContent={"flex-start"} align={"center"}>
+              <Text fontSize={{ base: "12px", md: "14px" }}>
+                Rows per page :
               </Text>
-            </Box>
-
+              <Select
+                size={{ base: "xs", sm: "sm" }}
+                borderRadius={5}
+                variant={"filled"}
+                icon={<MdArrowDropDown />}
+                padding="2px 8px 2px 12px"
+                focusBorderColor="teal.400"
+                align-items="center"
+                w={"fit-content"}
+                value={table.getState().pagination.pageSize}
+                onChange={(e) => {
+                  table.setPageSize(Number(e.target.value));
+                }}
+              >
+                {[5, 10, 20, 30, 40, 50].map((pageSize) => (
+                  <option key={pageSize} value={pageSize}>
+                    {pageSize}
+                  </option>
+                ))}
+              </Select>
+            </Flex>
             <ButtonGroup variant={"outline"} size={{ base: "sm", md: "md" }}>
               <Button
                 onClick={() => table.previousPage()}
@@ -299,30 +317,6 @@ export default function DataTable({
                 {">"}
               </Button>
             </ButtonGroup>
-          </Flex>
-
-          <Flex justifyContent={"flex-start"} align={"center"}>
-            <Text fontSize={{ base: "12px", md: "14px" }}>Rows per page :</Text>
-            <Select
-              size={{ base: "xs", sm: "sm" }}
-              borderRadius={5}
-              variant={"filled"}
-              icon={<MdArrowDropDown />}
-              padding="2px 8px 2px 12px"
-              focusBorderColor="teal.400"
-              align-items="center"
-              w={"fit-content"}
-              value={table.getState().pagination.pageSize}
-              onChange={(e) => {
-                table.setPageSize(Number(e.target.value));
-              }}
-            >
-              {[5, 10, 20, 30, 40, 50].map((pageSize) => (
-                <option key={pageSize} value={pageSize}>
-                  {pageSize}
-                </option>
-              ))}
-            </Select>
           </Flex>
         </Flex>
       </CardBody>

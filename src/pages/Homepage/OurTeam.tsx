@@ -2,6 +2,7 @@
 import { Box, Card, Container, Heading, Stack, Text } from "@chakra-ui/react";
 import { SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
+
 import { useFetchTeam } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
 import { Slider } from "../../component/Slider";
@@ -9,7 +10,6 @@ import { Slider } from "../../component/Slider";
 function OurTeam() {
   const { data } = useFetchTeam();
   const team = data?.find((item: any) => item.id === 1);
-
   const breakpoints = {
     0: {
       slidesPerView: 1,

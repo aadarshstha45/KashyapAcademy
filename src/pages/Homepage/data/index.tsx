@@ -1,12 +1,11 @@
 import Guru from "../../../assets/Guru.png";
+import { ScienceIcon, SpiritualIcon, WorldIcon } from "../../../assets/icons";
 import {
   LightIcon,
   MeditationIcon,
   MicroscopeIcon,
-  ScienceIcon,
-  SpiritualIcon,
-  WorldIcon,
-} from "../../../assets/icons";
+} from "../../../assets/icons/FocusIcon";
+
 export const whyUsData = [
   {
     id: 1,

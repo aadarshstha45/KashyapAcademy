@@ -9,9 +9,6 @@
 
 .swiper-pagination {
   position: absolute;
-}
-
-.swiper-activities {
   display: flex;
   justify-content: center;
   align-items: center;

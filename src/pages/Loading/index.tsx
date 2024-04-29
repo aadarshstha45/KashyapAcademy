@@ -1,6 +1,10 @@
 import { easeIn, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { LightIcon, MeditationIcon, MicroscopeIcon } from "../../assets/icons";
+import {
+  LightIcon,
+  MeditationIcon,
+  MicroscopeIcon,
+} from "../../assets/icons/FocusIcon";
 
 const images = [
   <MeditationIcon boxSize={{ base: 12, md: 16 }} />,

@@ -8,11 +8,11 @@ import LoadingScreen from "../../pages/Loading";
 function SchoolLayout() {
   return (
     <Flex flexDir={"column"}>
-      <Navbar />
       <Suspense fallback={<LoadingScreen />}>
+        <Navbar />
         <Outlet />
+        <Footer />
       </Suspense>
-      <Footer />
     </Flex>
   );
 }
