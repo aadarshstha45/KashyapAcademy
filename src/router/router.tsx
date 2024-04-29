@@ -1,17 +1,20 @@
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import CollegeLayout from "../layout/CollegeLayout/CollegeLayout";
-import RootLayout from "../layout/RootLayout";
-import SchoolLayout from "../layout/SchoolLayout/SchoolLayout";
-import AboutUs from "../pages/About";
-import Blogs from "../pages/Blogs";
-import BlogDetail from "../pages/Blogs/BlogDetail";
-import Contact from "../pages/Contact";
-import Downloads from "../pages/Downloads";
-import Events from "../pages/Events";
-import Gallery from "../pages/Gallery";
-import GalleryDetail from "../pages/Gallery/GalleryDetail";
-import HomePage from "../pages/Homepage";
-import { OurTeam } from "../pages/OurTeam";
+const SchoolLayout = lazy(() => import("../layout/SchoolLayout/SchoolLayout"));
+const RootLayout = lazy(() => import("../layout/RootLayout"));
+const AboutUs = lazy(() => import("../pages/About"));
+const BlogDetail = lazy(() => import("../pages/Blogs/BlogDetail"));
+const Blogs = lazy(() => import("../pages/Blogs"));
+const Contact = lazy(() => import("../pages/Contact"));
+const Downloads = lazy(() => import("../pages/Downloads"));
+const Events = lazy(() => import("../pages/Events"));
+const Gallery = lazy(() => import("../pages/Gallery"));
+const GalleryDetail = lazy(() => import("../pages/Gallery/GalleryDetail"));
+const HomePage = lazy(() => import("../pages/Homepage"));
+const OurTeam = lazy(() => import("../pages/OurTeam"));
+const CollegeLayout = lazy(
+  () => import("../layout/CollegeLayout/CollegeLayout")
+);
 
 const commonRoutes = [
   {

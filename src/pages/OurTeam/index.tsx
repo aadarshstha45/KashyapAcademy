@@ -3,7 +3,7 @@ import TeamBanner from "../../assets/Banner/OurTeam.png";
 import { Banner } from "../../component/Banner";
 import Teams from "./Teams";
 
-export const OurTeam = () => {
+function OurTeam() {
   return (
     <Flex flexDir={"column"}>
       <Banner
@@ -14,4 +14,6 @@ export const OurTeam = () => {
       <Teams />
     </Flex>
   );
-};
+}
+
+export default OurTeam;
