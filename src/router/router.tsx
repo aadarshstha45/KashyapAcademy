@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import ErrorPage from "../pages/Error";
+const Course = lazy(() => import("../pages/Course"));
 const NoticePage = lazy(() => import("../pages/Notice"));
 const SchoolLayout = lazy(() => import("../layout/SchoolLayout/SchoolLayout"));
 const RootLayout = lazy(() => import("../layout/RootLayout"));
@@ -15,6 +15,7 @@ const Gallery = lazy(() => import("../pages/Gallery"));
 const GalleryDetail = lazy(() => import("../pages/Gallery/GalleryDetail"));
 const HomePage = lazy(() => import("../pages/Homepage"));
 const OurTeam = lazy(() => import("../pages/OurTeam"));
+const FAQs = lazy(() => import("../pages/FAQs"));
 const CollegeLayout = lazy(
   () => import("../layout/CollegeLayout/CollegeLayout")
 );
@@ -64,6 +65,14 @@ const commonRoutes = [
     path: "notice",
     element: <NoticePage />,
   },
+  {
+    path: "course/:id",
+    element: <Course />,
+  },
+  {
+    path: "faqs",
+    element: <FAQs />,
+  },
 ];
 
 export const router = createBrowserRouter([
@@ -86,9 +95,5 @@ export const router = createBrowserRouter([
       ...route,
       path: `/college/${route.path}`,
     })),
-  },
-  {
-    path: "*",
-    element: <ErrorPage />,
   },
 ]);

@@ -12,20 +12,15 @@ import {
 import EventBanner from "../../assets/Banner/EventBanner.png";
 
 import { useState } from "react";
-import { useFetchEvent } from "../../api/HomeApi";
+import { useFetchEvent } from "../../api";
 import { BaseURL } from "../../api/axiosSetup";
 import { CalendarIcon, ClockIcon, PinIcon } from "../../assets/icons";
 import { Banner } from "../../component/Banner";
+import { CKEditor } from "../../component/CkEditor";
 
 function Events() {
   const [displayCount, setDisplayCount] = useState(3);
-  const [noOfLines, setNoOfLines] = useState(5);
-  const handleExpand = () => {
-    setNoOfLines(100);
-  };
-  const handleCompress = () => {
-    setNoOfLines(5);
-  };
+
   const { data } = useFetchEvent();
   return (
     <Flex flexDir={"column"}>
@@ -93,35 +88,7 @@ function Events() {
                   </Text>
                 </Flex>
               </HStack>
-              <Text
-                lineHeight={2}
-                fontWeight={500}
-                textAlign={"center"}
-                fontSize={{ base: "16px", md: "18px" }}
-                noOfLines={noOfLines}
-              >
-                {event.description}
-              </Text>
-              {noOfLines !== 100 && (
-                <Button
-                  onClick={handleExpand}
-                  variant={"transparent"}
-                  w={"fit-content"}
-                  p={0}
-                >
-                  Read More
-                </Button>
-              )}
-              {noOfLines !== 5 && (
-                <Button
-                  variant={"transparent"}
-                  w={"fit-content"}
-                  p={0}
-                  onClick={handleCompress}
-                >
-                  Read Less
-                </Button>
-              )}
+              <CKEditor data={event.description} />
             </Flex>
           ))
         ) : (

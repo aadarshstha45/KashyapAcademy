@@ -6,8 +6,12 @@ import {
   BlogApi,
   CourseMenuApi,
   DownloadApi,
+  EventApi,
+  FAQApi,
   FacultyApi,
   MessageApi,
+  NoticeApi,
+  NoticePopupApi,
   SchoolApi,
   TeamApi,
 } from "./api";
@@ -125,12 +129,68 @@ const useFetchDownload = (institution: string) => {
   );
 };
 
+const fetchEvent = () => {
+  return HttpClient.get(EventApi.getEvents);
+};
+
+const useFetchEvent = () => {
+  return useQuery([EventApi.getEvents], fetchEvent, {
+    select: (response) => response?.data?.data,
+    onError: (error: AxiosError) => {
+      toast.error((error?.response?.data as any)?.error);
+    },
+  });
+};
+
+const fetchNoticePopup = () => {
+  return HttpClient.get(NoticePopupApi.getNoticePopups);
+};
+
+const useFetchNoticePopup = () => {
+  return useQuery([NoticePopupApi.getNoticePopups], fetchNoticePopup, {
+    select: (response) => response?.data?.data,
+    onError: (error: AxiosError) => {
+      toast.error((error?.response?.data as any)?.error);
+    },
+  });
+};
+
+const fetchNotice = () => {
+  return HttpClient.get(NoticeApi.getNotices);
+};
+
+const useFetchNotice = () => {
+  return useQuery([NoticeApi.getNotices], fetchNotice, {
+    select: (response) => response?.data?.data,
+    onError: (error: AxiosError) => {
+      toast.error((error?.response?.data as any)?.error);
+    },
+  });
+};
+
+const fetchFAQ = () => {
+  return HttpClient.get(FAQApi.getFAQs);
+};
+
+const useFetchFAQ = () => {
+  return useQuery([FAQApi.getFAQs], fetchFAQ, {
+    select: (response) => response?.data?.data,
+    onError: (error: AxiosError) => {
+      toast.error((error?.response?.data as any)?.error);
+    },
+  });
+};
+
 export {
   useFetchBlogById,
   useFetchBlogs,
   useFetchCourseMenu,
   useFetchDownload,
+  useFetchEvent,
+  useFetchFAQ,
   useFetchFaculty,
+  useFetchNotice,
+  useFetchNoticePopup,
   useFetchSchool,
   useFetchTeams,
   useSendMessage,

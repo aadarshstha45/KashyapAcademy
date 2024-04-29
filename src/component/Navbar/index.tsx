@@ -37,7 +37,7 @@ export const Navbar = () => {
 
   return (
     <Flex as={"nav"} p={4} borderBottom={"1px solid #CACACA"}>
-      <Container maxW={{ base: "95vw", md: "90vw" }}>
+      <Container maxW={{ base: "95vw", lg: "85vw" }}>
         <Flex justifyContent={"space-between"}>
           <Box>
             <Image src={Logo} w={{ base: 150, md: 200 }} alt="Kasyap Academy" />
@@ -91,7 +91,11 @@ export const Navbar = () => {
                         <PopoverArrow />
                         {data ? (
                           data.map(({ id, title }: any, index: number) => (
-                            <NavLink key={id} to={to}>
+                            <NavLink
+                              key={id}
+                              to={`course/${id}`}
+                              reloadDocument
+                            >
                               <PopoverBody
                                 _hover={{
                                   bg: "primary.200",
@@ -129,6 +133,7 @@ export const Navbar = () => {
                   as={NavLink}
                   key={id}
                   fontWeight={500}
+                  reloadDocument
                   _hover={{
                     textDecoration: "none",
                     borderBottom: "2px solid #FF4900",
@@ -198,7 +203,11 @@ export const Navbar = () => {
                         <PopoverArrow />
                         {data ? (
                           data.map(({ id, title }: any, index: number) => (
-                            <NavLink key={id} to={to}>
+                            <NavLink
+                              key={id}
+                              to={`course/${id}`}
+                              reloadDocument
+                            >
                               <PopoverBody
                                 _hover={{
                                   bg: "primary.200",
@@ -236,6 +245,7 @@ export const Navbar = () => {
                   as={NavLink}
                   key={id}
                   fontWeight={500}
+                  reloadDocument
                   _hover={{
                     textDecoration: "none",
                     borderBottom: "2px solid #FF4900",

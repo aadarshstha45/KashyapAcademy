@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Divider,
-  HStack,
-  Link,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Container, Divider, Link, Stack, Text } from "@chakra-ui/react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { NavLink } from "react-router-dom";
 import { About } from "./About";
@@ -16,7 +7,6 @@ import { Links } from "./Links";
 import { Resources } from "./Resources";
 
 export const Footer = () => {
-  const path = window.location.pathname.split("/")[1];
   return (
     <Box bg={"#F2F2F2"}>
       <Container maxW={{ base: "95vw", md: "90vw", lg: "85vw" }} py={10}>
@@ -29,28 +19,10 @@ export const Footer = () => {
           <Masonry gutter="20px">
             <About />
             <Links />
-            <Resources />
             <Contact />
+            <Resources />
           </Masonry>
         </ResponsiveMasonry>
-        <HStack align={"end"} my={4}>
-          <Button
-            w={"fit-content"}
-            as={NavLink}
-            variant={"primary"}
-            to={"downloads"}
-          >
-            Downloads
-          </Button>
-          <Button
-            w={"fit-content"}
-            as={NavLink}
-            variant={"primary"}
-            to={path === "school" ? "/college" : "/school"}
-          >
-            Visit {path === "school" ? "College" : "School"} site
-          </Button>
-        </HStack>
 
         <Stack justify={"center"} align={"center"}>
           <Divider

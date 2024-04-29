@@ -49,65 +49,68 @@ function UpcomingEvents() {
           justifyItems={"center"}
           p={4}
         >
-          <Flex flexDir={"column"} gap={2} w={"full"}>
-            {data?.slice(1, data?.length).map((event: any) => (
-              <GridItem key={event.id} colSpan={1}>
-                <Card
-                  h={isLessThan420 ? 400 : 167}
-                  borderRadius={"5px"}
-                  border={" 3px solid #DCDCDC"}
-                  overflow={"hidden"}
-                >
-                  <Flex
-                    flexDir={isLessThan420 ? "column" : "row"}
-                    gap={4}
-                    h={"full"}
-                    align={"start"}
+          <GridItem>
+            <Flex flexDir={"column"} gap={2} w={"full"}>
+              {data?.slice(1, data?.length).map((event: any) => (
+                <GridItem key={event.id} colSpan={1}>
+                  <Card
+                    h={isLessThan420 ? 400 : 167}
+                    borderRadius={"5px"}
+                    border={" 3px solid #DCDCDC"}
+                    overflow={"hidden"}
                   >
-                    <Box
+                    <Flex
+                      flexDir={isLessThan420 ? "column" : "row"}
+                      gap={4}
                       h={"full"}
-                      bg={`url(${BaseURL}/${event.image})`}
-                      bgSize={"cover"}
-                      bgRepeat={"no-repeat"}
-                      bgPos={"center"}
-                      w={
-                        isLessThan420 ? "full" : { base: "150px", md: "200px" }
-                      }
-                    />
-                    <Stack p={2} gap={4}>
-                      <Text
-                        fontWeight={600}
-                        color={"#272D37"}
-                        fontSize={{
-                          base: "16px",
-                          sm: "18px",
-                          md: "20px",
-                          lg: "22px",
-                        }}
-                      >
-                        {event.title}
-                      </Text>
-                      <HStack gap={2} align={"center"}>
-                        <CalendarIcon boxSize={{ base: 4, sm: 6 }} />
-
-                        <Text fontSize={{ base: "12px", md: "16px" }}>
-                          {event.start_datetime}
+                      align={"start"}
+                    >
+                      <Box
+                        h={"full"}
+                        bg={`url(${BaseURL}/${event.image})`}
+                        bgSize={"cover"}
+                        bgRepeat={"no-repeat"}
+                        bgPos={"center"}
+                        w={
+                          isLessThan420
+                            ? "full"
+                            : { base: "150px", md: "200px" }
+                        }
+                      />
+                      <Stack p={2} gap={4}>
+                        <Text
+                          fontWeight={600}
+                          color={"#272D37"}
+                          fontSize={{
+                            base: "16px",
+                            sm: "18px",
+                            md: "20px",
+                            lg: "22px",
+                          }}
+                        >
+                          {event.title}
                         </Text>
-                      </HStack>
-                      <HStack gap={2} align={"center"}>
-                        <PinIcon boxSize={{ base: 4, sm: 6 }} />
+                        <HStack gap={2} align={"center"}>
+                          <CalendarIcon boxSize={{ base: 4, sm: 6 }} />
 
-                        <Text fontSize={{ base: "12px", md: "16px" }}>
-                          {event.location}
-                        </Text>
-                      </HStack>
-                    </Stack>
-                  </Flex>
-                </Card>
-              </GridItem>
-            ))}
-          </Flex>
+                          <Text fontSize={{ base: "12px", md: "16px" }}>
+                            {event.start_datetime}
+                          </Text>
+                        </HStack>
+                        <HStack gap={2} align={"center"}>
+                          <PinIcon boxSize={{ base: 4, sm: 6 }} />
 
+                          <Text fontSize={{ base: "12px", md: "16px" }}>
+                            {event.location}
+                          </Text>
+                        </HStack>
+                      </Stack>
+                    </Flex>
+                  </Card>
+                </GridItem>
+              ))}
+            </Flex>
+          </GridItem>
           {data?.slice(0, 1).map((event: any) => (
             <GridItem
               key={event.id}
@@ -130,7 +133,7 @@ function UpcomingEvents() {
                 >
                   <Box
                     h={"full"}
-                    bg={`url(${BaseURL}${event.image})`}
+                    bg={`url(${BaseURL}/${event.image})`}
                     bgSize={"cover"}
                     bgPos={"center"}
                     bgRepeat={"no-repeat"}

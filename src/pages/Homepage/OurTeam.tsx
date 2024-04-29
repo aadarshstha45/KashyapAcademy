@@ -5,6 +5,7 @@ import "swiper/swiper-bundle.css";
 
 import { useFetchTeam } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
+import { CKEditor } from "../../component/CkEditor";
 import { Slider } from "../../component/Slider";
 
 function OurTeam() {
@@ -39,9 +40,7 @@ function OurTeam() {
           <Heading size={{ base: "md", md: "lg", lg: "xl" }} pl={8} mb={2}>
             Our Team
           </Heading>
-          <Text fontSize={{ base: "14px", md: "16px" }} pl={8}>
-            {team?.description}
-          </Text>
+          <CKEditor data={team?.description} />
         </Box>
         <Slider
           noOfSlides={4}
@@ -52,10 +51,7 @@ function OurTeam() {
         >
           {team &&
             team.teams.map((item: any) => (
-              <SwiperSlide
-                key={item.id}
-                className="swiper-items swiper-activities"
-              >
+              <SwiperSlide key={item.id} className="swiper-items ">
                 <Card
                   borderRadius={"10px"}
                   role="group"

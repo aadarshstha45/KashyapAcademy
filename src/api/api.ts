@@ -39,3 +39,19 @@ export const CourseMenuApi = {
 export const DownloadApi = {
   getDownloads: "/downloads/:institution",
 };
+
+export const EventApi = {
+  getEvents: "/event",
+};
+
+export const NoticePopupApi = {
+  getNoticePopups: "/notice_popup",
+};
+
+export const NoticeApi = {
+  getNotices: "/notice",
+};
+
+export const FAQApi = {
+  getFAQs: "/faq",
+};

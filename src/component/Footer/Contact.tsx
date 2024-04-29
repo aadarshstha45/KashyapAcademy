@@ -23,7 +23,7 @@ export const Contact = () => {
   return (
     <Flex flexDir={"column"} gap={4}>
       <Text fontSize={{ base: "18px", md: "20px" }} fontWeight={700}>
-        Resources
+        Contact
       </Text>
       <Stack spacing={4}>
         {ContactData.map((link) => (

@@ -14,6 +14,7 @@ import { useState } from "react";
 
 import { useFetchFacility } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
+import NoImage from "../../assets/noImage/picture.png";
 
 function FacilitySection() {
   const [expanded, setExpanded] = useState<number | null>(0);
@@ -31,15 +32,22 @@ function FacilitySection() {
         <Flex gap={4} justify={"center"} py={4}>
           {data
             ?.slice(0, 6)
-            .map(({ id, title, description, icon }: any, index: any) => (
+            .map(({ id, title, description, image }: any, index: any) => (
               <Flex
                 bg={
                   expanded === index
-                    ? `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.00) 71.91%, rgba(0, 0, 0, 0.33) 82.46%, #000 97.5%), url(${BaseURL}/${icon}) no-repeat top center/cover`
-                    : `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.40) 100%), url(${BaseURL}/${icon}) no-repeat top center/cover`
+                    ? `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.00) 71.91%, rgba(0, 0, 0, 0.33) 82.46%, #000 97.5%), url(${
+                        image ? `${BaseURL}/${image}` : NoImage
+                      })`
+                    : `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.40) 100%), url(${
+                        image ? `${BaseURL}/${image}` : NoImage
+                      })`
                 }
                 key={id}
                 h={"571px"}
+                bgSize={"cover"}
+                bgPos={"top"}
+                bgRepeat={"no-repeat"}
                 align={"flex-end"}
                 p={4}
                 cursor={"pointer"}

@@ -1,53 +1,56 @@
 :root {
-  --swiper-navigation-size: 16px;
-  --swiper-theme-color: black;
+  --swiper-navigation-size: 16px !important;
+  --swiper-theme-color: black !important;
 }
 
 .swiper-wrapper {
-  padding: 40px 0px 50px 0px;
+  padding: 40px 0px 40px 0px !important;
 }
 
 .swiper-pagination {
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.swiper-items {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .swiper-button-prev,
 .swiper-button-next {
   position: absolute;
-  top: var(--swiper-navigation-top-offset, 50%);
-  width: calc(var(--swiper-navigation-size) / 44 * 27);
-  height: var(--swiper-navigation-size);
-  margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
-  z-index: 10;
-  cursor: pointer;
-  display: flex;
-  width: 30px;
-  height: 30px;
-  align-items: center;
-  justify-content: center;
-  color: #7c7ba1;
-  font-weight: 700;
-  background-color: #f6f6f6;
-  padding: 6px 9px;
-  border-radius: 50%;
+  top: var(--swiper-navigation-top-offset, 50%) !important;
+  width: calc(var(--swiper-navigation-size) / 44 * 27) !important;
+  height: var(--swiper-navigation-size) !important;
+  margin-top: calc(0px - (var(--swiper-navigation-size) / 2)) !important;
+  z-index: 10 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  width: 30px !important;
+  height: 30px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #7c7ba1 !important;
+  font-weight: 700 !important;
+  background-color: #f6f6f6 !important;
+  padding: 6px 9px !important;
+  border-radius: 50% !important;
 }
 
 .swiper-pagination-bullet {
-  margin-top: 20px;
-  background: #cfcdcd;
-  opacity: 1;
-  width: 16px;
-  height: 6px;
-  border-radius: 2px;
+  margin-top: 20px !important;
+  background: #cfcdcd !important;
+  opacity: 1 !important;
+  width: 16px !important;
+  height: 6px !important;
+  border-radius: 2px !important;
 }
 
 .swiper-pagination-bullet-active {
-  background: #b9b3b3;
-  opacity: 1;
-  width: 44px;
-  height: 6px;
-  border-radius: 2px;
+  background: #b9b3b3 !important;
+  width: 44px !important;
 }

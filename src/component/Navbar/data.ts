@@ -14,11 +14,7 @@ export const navItems = [
     name: "Course",
     to: "course",
   },
-  {
-    id: 4,
-    name: "Events",
-    to: "events",
-  },
+
   {
     id: 5,
     name: "Gallery",
@@ -29,11 +25,7 @@ export const navItems = [
     name: "Blog",
     to: "blogs",
   },
-  {
-    id: 7,
-    name: "Our Team",
-    to: "our-team",
-  },
+
   {
     id: 8,
     name: "Contact",

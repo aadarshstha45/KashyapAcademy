@@ -19,7 +19,7 @@ import { Banner } from "../../component/Banner";
 import { CKEditor } from "../../component/CkEditor";
 import LoadingScreen from "../Loading";
 
-export const Course = () => {
+function Course() {
   const { id } = useParams();
   const { data, isLoading } = useFetchFaculty(parseInt(id!));
   console.log(data);
@@ -52,8 +52,8 @@ export const Course = () => {
                 >
                   Program Content
                 </Text>
-                <Flex justify={"center"} align={"center"} mt={10}>
-                  <TableContainer w={{ md: "50%" }}>
+                <Flex justify={"center"} align={"center"}>
+                  <TableContainer w={{ md: "80vw", lg: "70vw" }}>
                     <Table size={"md"} variant="striped">
                       <Thead>
                         <Tr bg={"primary.500"}>
@@ -106,8 +106,8 @@ export const Course = () => {
                           <React.Fragment key={course.id}>
                             {Array.from({
                               length: Math.max(
-                                course["11"].length,
-                                course["12"].length
+                                course["11"]?.length,
+                                course["12"]?.length
                               ),
                             }).map((_, index) => (
                               <Tr key={index}>
@@ -121,7 +121,7 @@ export const Course = () => {
                                   fontWeight={400}
                                   textAlign={"center"}
                                 >
-                                  {course["11"][index].title}
+                                  {course["11"][index]?.title}
                                 </Td>
                                 <Td
                                   fontSize={{
@@ -133,7 +133,7 @@ export const Course = () => {
                                   fontWeight={400}
                                   textAlign={"center"}
                                 >
-                                  {course["12"][index].title}
+                                  {course["12"][index]?.title}
                                 </Td>
                               </Tr>
                             ))}
@@ -154,4 +154,6 @@ export const Course = () => {
       )}
     </Flex>
   );
-};
+}
+
+export default Course;

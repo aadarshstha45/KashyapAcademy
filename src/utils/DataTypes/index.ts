@@ -15,7 +15,7 @@ export type ServiceData = {
 export type FacultyData = {
   id: number;
   title: string;
-  icon: string;
+  image: string;
   courses: string[];
 };
 

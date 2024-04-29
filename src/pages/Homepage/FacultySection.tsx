@@ -11,6 +11,7 @@ import {
 import { NavLink } from "react-router-dom";
 import { useFetchFaculty } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
+import NoImage from "../../assets/noImage/picture.png";
 import { FacultyData } from "../../utils/DataTypes";
 
 function FacultySection() {
@@ -27,15 +28,17 @@ function FacultySection() {
         alignItems={"center"}
         justifyItems={"center"}
       >
-        {data?.map(({ id, title, icon }: FacultyData) => (
+        {data?.map(({ id, title, image }: FacultyData) => (
           <GridItem key={id} colSpan={1} w={"80%"}>
             <Flex
               role="group"
-              bg={`url(${BaseURL}/${icon})`}
+              bg={`url(${image ? `${BaseURL}/${image}` : NoImage})`}
               _hover={{
-                bg: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.40) 100%), url(${BaseURL}/${icon}) no-repeat top center/cover`,
+                bg: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.40) 100%), url(${
+                  image ? `${BaseURL}/${image}` : NoImage
+                }) no-repeat contain`,
               }}
-              bgSize={"cover"}
+              bgSize={image ? "cover" : "contain"}
               bgPos={"top"}
               bgRepeat={"no-repeat"}
               w={"100%"}

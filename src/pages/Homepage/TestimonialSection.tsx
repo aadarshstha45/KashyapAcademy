@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  Avatar,
   Box,
   Card,
   CardFooter,
@@ -7,7 +8,6 @@ import {
   Container,
   HStack,
   Heading,
-  Image,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -16,6 +16,7 @@ import "swiper/swiper-bundle.css";
 import { useFetchTestimonial } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
 import TestimonialBanner from "../../assets/Banner/Testimonial.png";
+import { CKEditor } from "../../component/CkEditor";
 import { Slider } from "../../component/Slider";
 
 function TestimonialSection() {
@@ -39,9 +40,9 @@ function TestimonialSection() {
       bgPos={"center"}
       py={{ base: 1, md: 10 }}
     >
-      <Container maxW={{ base: "99vw", md: "90vw", lg: "80vw" }} p={10}>
-        <Box>
-          <Heading size={{ base: "md", md: "lg", lg: "xl" }} mb={2}>
+      <Container maxW={{ base: "99vw", md: "90vw", lg: "80vw" }} py={10}>
+        <Box pl={4}>
+          <Heading size={{ base: "md", md: "lg", lg: "xl" }}>
             Testimonials
           </Heading>
         </Box>
@@ -62,25 +63,18 @@ function TestimonialSection() {
                 overflow={"hidden"}
               >
                 <CardHeader
-                  h={200}
+                  h={150}
+                  mb={0}
                   alignContent={"center"}
                   textAlign={"center"}
                 >
-                  <Text
-                    noOfLines={4}
-                    fontSize={{ base: "16px", md: "18px" }}
-                    mt={2}
-                  >
-                    {description}
-                  </Text>
+                  <CKEditor noOfLines={5} data={description} />
                 </CardHeader>
-                <CardFooter alignSelf={"center"}>
+                <CardFooter mt={0} alignSelf={"center"}>
                   <HStack align={"center"} gap={4}>
-                    <Image
-                      w={12}
+                    <Avatar
+                      size={{ base: "md", md: "lg" }}
                       src={`${BaseURL}/${image}`}
-                      borderRadius={"full"}
-                      alt={name}
                     />
                     <Stack gap={0} textAlign={"center"}>
                       <Text

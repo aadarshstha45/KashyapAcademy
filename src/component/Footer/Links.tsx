@@ -4,23 +4,23 @@ import { NavLink } from "react-router-dom";
 const LinksData = [
   {
     id: 1,
-    title: "Home",
-    to: "",
+    title: "Events",
+    to: "events",
   },
   {
     id: 2,
-    title: "About",
-    to: "about",
+    title: "Notice",
+    to: "notice",
   },
   {
     id: 3,
-    title: "Contact",
-    to: "contact",
+    title: "Our Team",
+    to: "our-team",
   },
   {
     id: 4,
-    title: "Services",
-    to: "services",
+    title: "FAQs",
+    to: "faqs",
   },
 ];
 
@@ -38,6 +38,7 @@ export const Links = () => {
             _hover={{ color: "#000", textDecoration: "none", fontWeight: 500 }}
             fontSize={{ base: "16px", md: "18px" }}
             as={NavLink}
+            reloadDocument
             to={link.to}
             key={link.id}
           >

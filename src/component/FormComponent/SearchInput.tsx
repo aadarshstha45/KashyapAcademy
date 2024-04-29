@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SearchIcon } from "@chakra-ui/icons";
 import {
   FormControl,
@@ -10,22 +9,10 @@ import {
 } from "@chakra-ui/react";
 import { debounce } from "lodash";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
-import { Control, Controller } from "react-hook-form";
-export type SearchInputProps = {
-  name: string;
-  control: Control<any>;
-  isControlled?: boolean;
-  type?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  isLoading?: boolean;
-  value?: string;
-  bg?: string;
-  variant?: string;
-  onSearch?: (data: string) => void;
-};
+import { Controller } from "react-hook-form";
+import { SearchInputProps } from "../Table/SearchInput";
 
-export const SearchInput = ({
+function SearchInput({
   name,
   type,
   placeholder,
@@ -33,9 +20,11 @@ export const SearchInput = ({
   isControlled,
   value,
   control,
+  variant,
+  bg,
   onSearch = () => {},
   ...extra
-}: SearchInputProps) => {
+}: SearchInputProps) {
   const [searchString, setSearchString] = useState("");
   const [isDebouncing, setIsDebouncing] = useState(false);
 
@@ -56,8 +45,8 @@ export const SearchInput = ({
     const value = e.target.value;
     setSearchString(value);
     debouncedOnSearch(value);
+    console.log(value);
   };
-
   return isControlled ? (
     <Controller
       control={control}
@@ -67,13 +56,16 @@ export const SearchInput = ({
           <FormControl id={name} isInvalid={!!error}>
             <InputGroup>
               <Input
-                w={{ base: "auto", sm: "250px" }}
                 placeholder={placeholder}
-                variant={"filled"}
+                variant={variant}
                 type={type}
+                bg={bg}
                 value={value}
-                focusBorderColor="teal.400"
-                onChange={(e) => debouncedSearchFunction(e.target.value)}
+                focusBorderColor="primary.200"
+                onChange={(e) => {
+                  debouncedSearchFunction(e.target.value);
+                  console.log(e.target.value);
+                }}
               />
               <InputRightElement>
                 <IconButton
@@ -97,12 +89,12 @@ export const SearchInput = ({
     <FormControl id={name}>
       <InputGroup>
         <Input
-          w={{ base: "150px", sm: "250px" }}
           placeholder={placeholder}
-          variant={"filled"}
+          variant={variant}
           type={type}
+          bg={bg}
           value={value}
-          focusBorderColor="teal.400"
+          focusBorderColor="primary.200"
           onChange={handleChange}
           onKeyDown={(event) => {
             if (event.key === "Enter") {
@@ -125,4 +117,6 @@ export const SearchInput = ({
       </InputGroup>
     </FormControl>
   );
-};
+}
+
+export default SearchInput;

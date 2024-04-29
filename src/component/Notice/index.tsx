@@ -1,4 +1,5 @@
 import {
+  Button,
   Image,
   Modal,
   ModalBody,
@@ -8,24 +9,35 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useFetchNoticePopup } from "../../api";
+import { BaseURL } from "../../api/axiosSetup";
 
 export const Notice = () => {
-  const [open, setOpen] = useState(true);
-  const [id, setId] = useState<number | null>(null);
+  const { data } = useFetchNoticePopup();
+  const [currentModalIndex, setCurrentModalIndex] = useState(0);
+  const [isOpen, setIsOpen] = useState(true);
 
-  const handleClose = (index: number) => {
-    setOpen(index === id ? false : true);
+  const handleOpenNextModal = () => {
+    if (currentModalIndex < data.length - 1) {
+      setCurrentModalIndex(currentModalIndex + 1);
+    } else {
+      setIsOpen(false);
+    }
+  };
+
+  const handleOpenAll = () => {
+    setIsOpen(true);
+    setCurrentModalIndex(0);
   };
 
   return (
     <>
-      <Modal isOpen={open} onClose={() => handleClose}>
-        <ModalOverlay />
-        {...Array(10)
-          .fill(0)
-          .map((_, index) => (
-            <ModalContent>
-              <ModalHeader>Title Goes Here</ModalHeader>
+      {data && isOpen && (
+        <>
+          <Modal isOpen={true} onClose={handleOpenNextModal}>
+            <ModalOverlay />
+            <ModalContent w={"fit-content"} h={"fit-content"}>
+              <ModalHeader>{data[currentModalIndex].title}</ModalHeader>
               <ModalBody>
                 <ModalCloseButton
                   bg={"primary.500"}
@@ -33,19 +45,26 @@ export const Notice = () => {
                   borderRadius={"full"}
                   top={-3}
                   right={-4}
-                  onClick={() => {
-                    setId(index);
-                    handleClose(index);
-                  }}
+                  onClick={handleOpenNextModal}
                 />
                 <Image
-                  src="https://source.unsplash.com/random/800x600"
+                  src={`${BaseURL}/${data[currentModalIndex].image}`}
                   alt="Random Image"
                 />
               </ModalBody>
             </ModalContent>
-          ))}
-      </Modal>
+          </Modal>
+          <Button
+            variant={"outline"}
+            colorScheme={"primary"}
+            w={"fit-content"}
+            onClick={handleOpenAll}
+            borderRadius={0}
+          >
+            Close All
+          </Button>
+        </>
+      )}
     </>
   );
 };

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Box,
+  Button,
   Card,
   CardBody,
   Container,
@@ -10,9 +11,13 @@ import {
 } from "@chakra-ui/react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { useFetchTeams } from "../../api";
+import { BaseURL } from "../../api/axiosSetup";
+import { CKEditor } from "../../component/CkEditor";
+import { useTeamCount } from "../../utils/store";
 
 function Teams() {
   const { data } = useFetchTeams();
+  const { count, increment, reset } = useTeamCount();
   return (
     <>
       {data?.map((team: any, index: number) => (
@@ -31,7 +36,7 @@ function Teams() {
             borderColor={"secondary.500"}
             py={10}
           >
-            {/* <SimpleGrid columns={{ base: 2, md: 4 }} spacing={4} p={4}>
+            {/* <SimpleGrid columns={{ base: 2, lg: 4 }} spacing={4} p={4}>
               <GridItem colSpan={1}>
                 <Box>
                   <Text
@@ -45,25 +50,26 @@ function Teams() {
                   >
                     {team?.title}
                   </Text>
-                  <Text noOfLines={5} fontSize={{ base: "sm", md: "md" }}>
-                    {team?.description}
-                  </Text>
+                  <CKEditor data={team?.description} />
                 </Box>
               </GridItem>
 
-              {team?.teams.map((member: any) => (
+              {team?.teams.slice(0, count).map((member: any) => (
                 <GridItem colSpan={1} key={member?.id} h={"100%"}>
                   <Card
                     boxShadow={"0px 13px 19px 0px rgba(0, 0, 0, 0.07)"}
                     borderRadius={"20px"}
                     overflow={"hidden"}
                     w={"90%"}
+                    h={350}
                   >
                     <Image
-                      src={`http://127.0.0.1:8000${member?.image}`}
+                      src={`${BaseURL}/${member?.image}`}
                       alt={member?.title}
+                      h={250}
+                      objectFit={"cover"}
                     />
-                    <CardBody>
+                    <CardBody mt={0}>
                       <Stack
                         justify={"center"}
                         align={"center"}
@@ -90,7 +96,7 @@ function Teams() {
             </SimpleGrid> */}
 
             <ResponsiveMasonry
-              columnsCountBreakPoints={{ 350: 1, 400: 2, 900: 3, 1200: 4 }}
+              columnsCountBreakPoints={{ 350: 1, 550: 2, 900: 3, 1200: 4 }}
               style={{
                 padding: "20px",
               }}
@@ -108,18 +114,20 @@ function Teams() {
                   >
                     {team?.title}
                   </Text>
-                  <Text noOfLines={6} fontSize={{ base: "sm", md: "md" }}>
-                    {team?.description}
-                  </Text>
+                  <CKEditor noOfLines={15} data={team?.description} />
                 </Box>
-                {team?.teams.slice(0, 3).map((member: any) => (
+                {team?.teams.slice(0, count).map((member: any) => (
                   <Card
                     key={member?.id}
                     boxShadow={"0px 13px 19px 0px rgba(0, 0, 0, 0.07)"}
                     borderRadius={"20px"}
                     overflow={"hidden"}
                   >
-                    <Image src={`http://127.0.0.1:8000${member?.image}`} />
+                    <Image
+                      h={"300px"}
+                      objectFit={"cover"}
+                      src={`${BaseURL}/${member?.image}`}
+                    />
                     <CardBody overflow={"clip"}>
                       <Stack
                         justify={"center"}
@@ -145,6 +153,30 @@ function Teams() {
                 ))}
               </Masonry>
             </ResponsiveMasonry>
+            <Stack align={"center"}>
+              {team?.teams.length > count && (
+                <Button
+                  variant={"outline"}
+                  colorScheme={"primary"}
+                  w={"fit-content"}
+                  onClick={increment}
+                  borderRadius={0}
+                >
+                  Load More
+                </Button>
+              )}
+              {count > 3 && team?.teams.length <= count && (
+                <Button
+                  variant={"outline"}
+                  colorScheme={"primary"}
+                  w={"fit-content"}
+                  onClick={reset}
+                  borderRadius={0}
+                >
+                  Reset
+                </Button>
+              )}
+            </Stack>
           </Container>
         </Box>
       ))}

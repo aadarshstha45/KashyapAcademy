@@ -13,8 +13,10 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { useFetchBlog } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
+import { CKEditor } from "../../component/CkEditor";
 
 function BlogSection() {
   const { data } = useFetchBlog();
@@ -50,7 +52,8 @@ function BlogSection() {
                   <CardHeader borderRadius={10} overflow={"hidden"}>
                     <Image
                       w={"full"}
-                      h={"full"}
+                      h={"300px"}
+                      objectFit={"cover"}
                       borderRadius={10}
                       src={`${BaseURL}/${blog.image}`}
                       alt={blog.title}
@@ -60,13 +63,19 @@ function BlogSection() {
                     <Heading noOfLines={2} size="md" mb={2}>
                       {blog.title}
                     </Heading>
-                    <Box>{blog.content}</Box>
+                    <Box>
+                      <CKEditor noOfLines={4} data={blog.content} />
+                    </Box>
                     <Box>
                       <Flex justify={"space-between"} my={4}>
                         <Button
+                          as={Link}
+                          to={`blogs/${blog.id}`}
                           w={"fit-content"}
                           size={{ base: "xs", md: "sm" }}
-                          variant={"primary"}
+                          colorScheme={"primary"}
+                          variant={"outline"}
+                          borderRadius={0}
                         >
                           Read More
                         </Button>

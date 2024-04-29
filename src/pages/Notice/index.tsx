@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Card,
   CardBody,
@@ -8,62 +9,44 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { useFetchNotice } from "../../api";
+import { BaseURL } from "../../api/axiosSetup";
+import LoadingScreen from "../Loading";
 
 function NoticePage() {
+  const { data, isLoading } = useFetchNotice();
   return (
     <Container maxW={{ base: "95vw", md: "85vw" }} py={20}>
-      <ResponsiveMasonry
-        columnsCountBreakPoints={{ 0: 1, 600: 2, 1200: 3, 1600: 4 }}
-      >
-        <Masonry gutter="20px">
-          {[...Array(5)].map((_, index) => (
-            <Card overflow={"hidden"} key={index}>
-              <CardHeader h={"fit-content"} p={0}>
-                <Image
-                  w={"100%"}
-                  h={"400px"}
-                  objectFit={"cover"}
-                  objectPosition={"center"}
-                  src="https://source.unsplash.com/random"
-                  alt="Segun Adebayo"
-                />
-              </CardHeader>
-              <CardBody>
-                <Heading size="md">Notice 1</Heading>
-                <Text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </Text>
-              </CardBody>
-            </Card>
-          ))}
-          {[...Array(5)].map((_, index) => (
-            <Card key={index}>
-              <CardHeader h={"fit-content"} p={0}>
-                <Image
-                  w={"100%"}
-                  h={"400px"}
-                  objectFit={"cover"}
-                  objectPosition={"center"}
-                  src="https://source.unsplash.com/random"
-                  alt="Segun Adebayo"
-                />
-              </CardHeader>
-
-              <CardBody>
-                <Heading size="md">Notice 1</Heading>
-                <Text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. ipsum
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. dolor
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. sit
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. amet,
-                  consectetur adipiscing elit.
-                </Text>
-              </CardBody>
-            </Card>
-          ))}
-        </Masonry>
-      </ResponsiveMasonry>
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{ 0: 1, 600: 2, 1200: 3, 1600: 4 }}
+        >
+          <Masonry gutter="20px">
+            {data?.map((notice: any) => (
+              <Card overflow={"hidden"} key={notice.id}>
+                <CardHeader h={"fit-content"} p={0}>
+                  <Image
+                    w={"100%"}
+                    h={"400px"}
+                    objectFit={"cover"}
+                    objectPosition={"center"}
+                    src={`${BaseURL}/${notice.image}`}
+                    alt="Segun Adebayo"
+                  />
+                </CardHeader>
+                <CardBody>
+                  <Text fontSize={"sm"}>{notice.date}</Text>
+                  <Heading mb={4} size="md">
+                    {notice.title}
+                  </Heading>
+                </CardBody>
+              </Card>
+            ))}
+          </Masonry>
+        </ResponsiveMasonry>
+      )}
     </Container>
   );
 }
