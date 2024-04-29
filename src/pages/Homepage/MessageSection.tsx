@@ -11,7 +11,7 @@ import Guru1 from "../../assets/Guru1.png";
 import { FlowerIcon, FlowerIcon2, QuoteIcon } from "../../assets/icons";
 import { messageData } from "./data";
 
-export const MessageSection = () => {
+function MessageSection() {
   return (
     <Container maxW={{ base: "95vw", md: "90vw", lg: "80vw" }} py={10}>
       {messageData.map(({ id, name, designation, message, image }) => (
@@ -117,4 +117,6 @@ export const MessageSection = () => {
       ))}
     </Container>
   );
-};
+}
+
+export default MessageSection;

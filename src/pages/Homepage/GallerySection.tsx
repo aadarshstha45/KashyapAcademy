@@ -14,7 +14,8 @@ import { useFetchGallery } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
 import GalleryBanner from "../../assets/Banner/Gallery.png";
 import { Icon1 } from "../../assets/GalleryIcons";
-export const GallerySection = () => {
+
+function GallerySection() {
   const navigate = useNavigate();
   const { data } = useFetchGallery();
 
@@ -109,4 +110,6 @@ export const GallerySection = () => {
       )}
     </>
   );
-};
+}
+
+export default GallerySection;

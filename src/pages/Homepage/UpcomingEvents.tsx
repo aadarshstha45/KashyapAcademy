@@ -19,7 +19,7 @@ import { BaseURL } from "../../api/axiosSetup";
 import EventBanner from "../../assets/Banner/Events.png";
 import { CalendarIcon, PinIcon } from "../../assets/icons";
 
-export const UpcomingEvents = () => {
+function UpcomingEvents() {
   const [isLessThan420] = useMediaQuery("(max-width: 420px)");
   const { data } = useFetchEvent();
   return (
@@ -182,4 +182,6 @@ export const UpcomingEvents = () => {
       </Container>
     </Box>
   );
-};
+}
+
+export default UpcomingEvents;

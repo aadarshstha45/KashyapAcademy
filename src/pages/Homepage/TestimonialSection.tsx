@@ -17,7 +17,8 @@ import { useFetchTestimonial } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
 import TestimonialBanner from "../../assets/Banner/Testimonial.png";
 import { Slider } from "../../component/Slider";
-export const TestimonialSection = () => {
+
+function TestimonialSection() {
   const { data } = useFetchTestimonial();
   const breakpoints = {
     0: {
@@ -108,4 +109,6 @@ export const TestimonialSection = () => {
       </Container>
     </Box>
   );
-};
+}
+
+export default TestimonialSection;

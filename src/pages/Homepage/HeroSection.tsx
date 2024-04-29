@@ -1,13 +1,20 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useFetchHomeContent } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
+import { Notice } from "../../component/Notice";
 
-export const HeroSection = () => {
+function HeroSection() {
   const path = location.pathname.split("/")[1];
-  console.log(path);
   const { data } = useFetchHomeContent(path);
-  console.log(data);
   const image = `${BaseURL}/${data?.image}`;
+  const [noticeShown, setNoticeShown] = useState(false);
+
+  useEffect(() => {
+    if (path === "school" || ("college" && !noticeShown)) {
+      setNoticeShown(true);
+    }
+  }, []);
 
   return (
     <Box
@@ -22,6 +29,7 @@ export const HeroSection = () => {
       p={4}
       mb={4}
     >
+      {noticeShown && <Notice />}
       <Flex
         flexDir={"column"}
         bg={"rgba(255, 73, 0, 0.59)"}
@@ -45,4 +53,6 @@ export const HeroSection = () => {
       </Flex>
     </Box>
   );
-};
+}
+
+export default HeroSection;

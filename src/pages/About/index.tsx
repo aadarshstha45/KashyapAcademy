@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import AboutBanner from "../../assets/Banner/AboutBanner.png";
-import { MessageSection } from "../Homepage/MessageSection";
+import MessageSection from "../Homepage/MessageSection";
 import AboutSection from "./AboutSection";
 import MVGSection from "./MVGSection";
 import WhyUsSection from "./WhyUsSection";

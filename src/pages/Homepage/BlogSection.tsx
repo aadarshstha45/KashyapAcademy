@@ -16,7 +16,7 @@ import {
 import { useFetchBlog } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
 
-export const BlogSection = () => {
+function BlogSection() {
   const { data } = useFetchBlog();
   return (
     <Box bg={""} py={{ base: 1, md: 10 }}>
@@ -82,4 +82,6 @@ export const BlogSection = () => {
       </Container>
     </Box>
   );
-};
+}
+
+export default BlogSection;

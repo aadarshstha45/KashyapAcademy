@@ -15,7 +15,7 @@ import { useState } from "react";
 import { useFetchFacility } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
 
-export const FacilitySection = () => {
+function FacilitySection() {
   const [expanded, setExpanded] = useState<number | null>(0);
   const [isLessThan768] = useMediaQuery("(max-width: 768px)");
   const { data } = useFetchFacility();
@@ -107,4 +107,6 @@ export const FacilitySection = () => {
       )}
     </Container>
   );
-};
+}
+
+export default FacilitySection;

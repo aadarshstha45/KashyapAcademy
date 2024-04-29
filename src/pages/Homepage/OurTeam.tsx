@@ -6,7 +6,7 @@ import { useFetchTeam } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
 import { Slider } from "../../component/Slider";
 
-export const OurTeam = () => {
+function OurTeam() {
   const { data } = useFetchTeam();
   const team = data?.find((item: any) => item.id === 1);
 
@@ -96,4 +96,6 @@ export const OurTeam = () => {
       </Container>
     </Box>
   );
-};
+}
+
+export default OurTeam;

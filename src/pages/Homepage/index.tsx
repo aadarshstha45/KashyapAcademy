@@ -1,16 +1,17 @@
 import { Flex } from "@chakra-ui/react";
+import { lazy } from "react";
 import { useLocation } from "react-router-dom";
-import { BlogSection } from "./BlogSection";
-import { FacilitySection } from "./FacilitySection";
-import { FacultySection } from "./FacultySection";
-import { GallerySection } from "./GallerySection";
-import { HeroSection } from "./HeroSection";
-import { MessageSection } from "./MessageSection";
-import { OurFocus } from "./OurFocus";
-import { OurTeam } from "./OurTeam";
-import { TestimonialSection } from "./TestimonialSection";
-import { UpcomingEvents } from "./UpcomingEvents";
-import { WhyUsSection } from "./WhyUsSection";
+const FacilitySection = lazy(() => import("./FacilitySection"));
+const GallerySection = lazy(() => import("./GallerySection"));
+const HeroSection = lazy(() => import("./HeroSection"));
+const MessageSection = lazy(() => import("./MessageSection"));
+const OurFocus = lazy(() => import("./OurFocus"));
+const TestimonialSection = lazy(() => import("./TestimonialSection"));
+const UpcomingEvents = lazy(() => import("./UpcomingEvents"));
+const WhyUsSection = lazy(() => import("./WhyUsSection"));
+const FacultySection = lazy(() => import("./FacultySection"));
+const OurTeam = lazy(() => import("./OurTeam"));
+const BlogSection = lazy(() => import("./BlogSection"));
 
 function HomePage() {
   const location = useLocation();

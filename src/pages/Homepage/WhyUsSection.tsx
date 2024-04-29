@@ -16,7 +16,7 @@ import SchoolImage from "../../assets/WhyUs/School.png";
 import { WhyUsData } from "../../utils/DataTypes";
 import { whyUsData } from "./data";
 
-export const WhyUsSection = () => {
+function WhyUsSection() {
   const { data } = useFetchStatistics();
   const location = useLocation();
   const { pathname } = location;
@@ -123,4 +123,6 @@ export const WhyUsSection = () => {
       </Flex>
     </Box>
   );
-};
+}
+
+export default WhyUsSection;

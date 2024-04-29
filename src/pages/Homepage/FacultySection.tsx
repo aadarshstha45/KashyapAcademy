@@ -13,7 +13,7 @@ import { useFetchFaculty } from "../../api/HomeApi";
 import { BaseURL } from "../../api/axiosSetup";
 import { FacultyData } from "../../utils/DataTypes";
 
-export const FacultySection = () => {
+function FacultySection() {
   const { data } = useFetchFaculty();
 
   return (
@@ -85,4 +85,6 @@ export const FacultySection = () => {
       </SimpleGrid>
     </Container>
   );
-};
+}
+
+export default FacultySection;

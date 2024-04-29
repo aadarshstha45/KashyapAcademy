@@ -9,7 +9,8 @@ import {
 } from "@chakra-ui/react";
 import FocusBanner from "../../assets/Banner/Focus.png";
 import { focusData } from "./data";
-export const OurFocus = () => {
+
+function OurFocus() {
   return (
     <Box py={10} pos={"relative"}>
       <Image
@@ -69,4 +70,6 @@ export const OurFocus = () => {
       </Container>
     </Box>
   );
-};
+}
+
+export default OurFocus;
